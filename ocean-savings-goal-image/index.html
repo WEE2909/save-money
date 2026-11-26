@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#082b4b"><link rel="manifest" href="manifest.webmanifest">
+<title>เก็บตังค์ตามเป้า</title>
+<style>
+:root{--bg:#061b35;--card:rgba(10,42,73,.88);--ink:#effaff;--muted:#a9c7d8;--green:#43d6c5;--line:rgba(155,220,235,.19);--gold:#ffd98a}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 12% 0%,#17658a 0%,transparent 36%),radial-gradient(ellipse at 100% 30%,#0d496c 0%,transparent 34%),linear-gradient(160deg,#06172f 0%,#082b4b 48%,#041629 100%);color:var(--ink);font:16px system-ui,-apple-system,sans-serif;overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;pointer-events:none;border:1px solid rgba(130,225,238,.12);border-radius:50%;width:320px;height:320px;right:-180px;top:18%;box-shadow:0 0 0 24px rgba(130,225,238,.025),0 0 0 52px rgba(130,225,238,.02)}
+body:after{width:220px;height:220px;left:-150px;right:auto;top:70%;box-shadow:0 0 0 20px rgba(130,225,238,.025),0 0 0 44px rgba(130,225,238,.02)}
+main{position:relative;z-index:1;max-width:520px;margin:auto;padding:calc(22px + env(safe-area-inset-top)) 16px calc(40px + env(safe-area-inset-bottom))}
+.head{display:flex;justify-content:space-between;align-items:center;margin:4px 0 18px;padding:10px 2px}
+h1{font-size:25px;margin:0;letter-spacing:.2px}.sub{color:#b9d9e7;font-size:13px;margin-top:5px}
+.head>span{font-size:27px;width:54px;height:54px;display:grid;place-items:center;border-radius:18px;background:linear-gradient(145deg,#1b7890,#104263);border:1px solid #66d8db55;box-shadow:0 8px 24px #00111f88}
+.card{background:linear-gradient(145deg,rgba(13,54,88,.94),rgba(7,34,62,.94));border:1px solid var(--line);border-radius:23px;padding:19px;margin:14px 0;box-shadow:0 14px 34px #00101f66,inset 0 1px 0 #d8fbff12;backdrop-filter:blur(12px)}
+.card h2{color:#f0fbff}
+.big{font-size:42px;font-weight:850;letter-spacing:-1.4px;color:#62ead9;text-shadow:0 3px 22px #31c9bd35}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.progress{height:13px;background:#031a30;border:1px solid #a6e9e51f;border-radius:20px;overflow:hidden;margin:13px 0}
+.fill{height:100%;width:0;background:linear-gradient(90deg,#20a9b5,#62ead9,#b2f3db);border-radius:20px;transition:width .3s;box-shadow:0 0 14px #4ce5d488}
+label{display:block;font-weight:650;font-size:14px;margin:12px 0 6px;color:#d9f3fa}
+input,button{font:inherit}
+input[type=text],input[type=number],input[type=time],input[type=file]{width:100%;border:1px solid #9bcbd33b;border-radius:13px;padding:12px;background:#041e37;color:var(--ink);color-scheme:dark}
+input:focus{outline:2px solid #4ed9d0;outline-offset:1px}
+button{border:0;border-radius:13px;padding:13px 15px;background:linear-gradient(135deg,#28b8b7,#49ddc8);color:#032c3a;font-weight:800;cursor:pointer;box-shadow:0 7px 18px #00131f66}
+button.secondary{background:#123e5c;color:#c8f7f4;border:1px solid #6dcac34d;box-shadow:none}
+button:disabled{opacity:.45;box-shadow:none}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.muted{color:var(--muted);font-size:13px}
+#preview{width:100%;max-height:240px;object-fit:contain;border-radius:14px;margin-top:10px;display:none;background:#031a30;border:1px solid var(--line)}
+.goal-photo-wrap{position:relative;width:100%;height:190px;margin:12px 0 8px;border-radius:17px;overflow:hidden;border:1px solid #9bcbd33b;background:linear-gradient(135deg,#0b3858,#061b35);display:grid;place-items:center}
+#goalPhoto{width:100%;height:100%;object-fit:cover}
+#goalPhotoEmpty{text-align:center;color:#9bcbd3;font-size:32px;line-height:1.6}
+#goalPhotoEmpty span{font-size:13px;color:var(--muted)}
+
+.item{border-top:1px solid var(--line);padding:12px 0;display:flex;gap:12px;align-items:center}.thumb{width:58px;height:58px;object-fit:cover;border-radius:12px;background:#0b2b47;border:1px solid var(--line)}
+.item .details{flex:1;min-width:0}.amount{font-weight:800;color:#61e5d4}.tiny{font-size:12px;color:var(--muted)}
+.notice{background:rgba(79,123,140,.16);border:1px solid #a8dce044;padding:13px;border-radius:14px;color:#c5e2eb;font-size:13px;line-height:1.6}
+footer{font-size:12px;color:#9dbfce;text-align:center;padding:10px}
+::selection{background:#48d8ca55}
+@media(max-width:360px){main{padding-left:12px;padding-right:12px}.big{font-size:36px}.card{padding:16px}}
+</style></head>
+<body><main>
+<div class="head"><div><h1>🌊 เก็บตังค์ตามเป้า</h1><div class="sub">ค่อย ๆ เก็บ ให้ถึงเป้าหมายใต้ท้องทะเล</div></div><span>🪸</span></div>
+<section class="card">
+ <div class="muted" id="goalName">เป้าหมาย: โปรตีนสกิมเมอร์</div>
+ <div class="goal-photo-wrap">
+  <img id="goalPhoto" alt="รูปภาพเป้าหมาย" style="display:none">
+  <div id="goalPhotoEmpty">🪸<br><span>เพิ่มรูปสิ่งที่กำลังเก็บเงินซื้อ</span></div>
+ </div>
+ <label for="goalPhotoInput">รูปภาพเป้าหมาย</label>
+ <input id="goalPhotoInput" type="file" accept="image/*" capture="environment">
+ <div class="muted">เลือกรูปโปรตีนสกิมเมอร์หรือรูปเป้าหมายที่อยากได้</div>
+ <div class="big" id="balance">฿450</div>
+ <div class="row muted"><span id="percent">37.5% ของเป้าหมาย</span><b id="remaining">เหลือ ฿750</b></div>
+ <div class="progress"><div class="fill" id="bar"></div></div>
+ <div class="row muted"><span>เป้าหมายรวม</span><b id="goalText">฿1,200</b></div>
+</section>
+<section class="card">
+ <h2 style="font-size:18px;margin:0">➕ บันทึกเงินเก็บ</h2>
+ <label for="amount">จำนวนเงินที่เก็บวันนี้ (บาท)</label><input id="amount" type="number" min="1" step="1" value="100">
+ <label for="proof">ถ่ายรูปหรือเลือกรูปหลักฐาน <span style="color:#b45309">*</span></label>
+ <input id="proof" type="file" accept="image/*" capture="environment">
+ <img id="preview" alt="ตัวอย่างรูปหลักฐาน">
+ <p class="muted">ต้องแนบรูปก่อนบันทึกทุกครั้ง รูปจะเก็บไว้ในอุปกรณ์นี้</p>
+ <button id="save" style="width:100%" disabled>บันทึกเงินเก็บพร้อมรูป</button>
+ <div id="msg" class="muted" style="margin-top:8px"></div>
+</section>
+<section class="card">
+ <h2 style="font-size:18px;margin:0 0 8px">⚙️ ตั้งค่าเป้าหมาย</h2>
+ <label for="name">ชื่อเป้าหมาย</label><input id="name" type="text" value="โปรตีนสกิมเมอร์">
+ <div class="grid"><div><label for="goal">ยอดเป้าหมาย (บาท)</label><input id="goal" type="number" min="1" value="1200"></div><div><label for="start">ยอดที่มีตอนนี้ (บาท)</label><input id="start" type="number" min="0" value="450"></div></div>
+ <button class="secondary" id="update" style="width:100%;margin-top:12px">อัปเดตเป้าหมาย</button>
+</section>
+<section class="card">
+ <div class="row"><h2 style="font-size:18px;margin:0">📸 ประวัติการเก็บ</h2><span class="muted" id="count">0 รายการ</span></div>
+ <div id="history" class="muted" style="margin-top:8px">ยังไม่มีรายการที่บันทึกในแอปนี้</div>
+</section>
+<section class="card">
+ <h2 style="font-size:18px;margin:0 0 8px">🔔 การแจ้งเตือน</h2>
+ <p class="muted">เปิดการแจ้งเตือนเพื่อให้เว็บนี้ส่งข้อความเตือนเมื่อคุณเปิดเว็บอยู่ และตั้งเตือนรายวันในเบราว์เซอร์ได้ในบางอุปกรณ์</p>
+ <div class="grid"><button id="notify">อนุญาตการแจ้งเตือน</button><button class="secondary" id="test">ทดสอบแจ้งเตือน</button></div>
+ <label for="remind">เวลาเตือน (เมื่อเปิดเว็บอยู่)</label><input id="remind" type="time" value="19:00">
+ <div class="muted" id="notifyState" style="margin-top:8px">สถานะ: ยังไม่ได้ตรวจสอบ</div>
+</section>
+<div class="notice">หมายเหตุ: ข้อมูลและรูปเก็บในเบราว์เซอร์ของอุปกรณ์นี้ ไม่ได้ส่งขึ้นคลาวด์ ควรสำรองข้อมูลก่อนล้างข้อมูลเว็บไซต์หรือเปลี่ยนเครื่อง การแจ้งเตือนอัตโนมัติแม้ปิดเว็บ/ปิดเครื่อง ต้องติดตั้งและตั้งค่าระบบแจ้งเตือนแบบ push บนเว็บที่เผยแพร่ผ่าน HTTPS เพิ่มเติม</div>
+<footer>เก็บเงินอย่างสบาย ๆ วันไหนมีค่าน้ำมันก็ข้ามได้ ❤️</footer>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+let db, selectedPhoto=null, data={goal:1200,balance:450,name:"โปรตีนสกิมเมอร์",entries:[]};
+const req=indexedDB.open("savings-proof-db",1);
+req.onupgradeneeded=()=>req.result.createObjectStore("photos");
+req.onsuccess=()=>{db=req.result; render(); loadGoalPhoto()};
+function savePhoto(id,blob){return new Promise((res,rej)=>{let t=db.transaction("photos","readwrite");t.objectStore("photos").put(blob,id);t.oncomplete=res;t.onerror=rej})}
+function getPhoto(id){return new Promise(res=>{let t=db.transaction("photos");let r=t.objectStore("photos").get(id);r.onsuccess=()=>res(r.result)})}
+async function loadGoalPhoto(){
+ const blob=await getPhoto("goal-image");
+ if(blob){$("goalPhoto").src=URL.createObjectURL(blob);$("goalPhoto").style.display="block";$("goalPhotoEmpty").style.display="none"}
+}
+function persist(){localStorage.setItem("savings-data",JSON.stringify(data))}
+function render(){
+ $("balance").textContent="฿"+data.balance.toLocaleString("th-TH");
+ $("goalText").textContent="฿"+data.goal.toLocaleString("th-TH");
+ $("remaining").textContent="เหลือ ฿"+Math.max(0,data.goal-data.balance).toLocaleString("th-TH");
+ let p=Math.min(100,data.goal?data.balance/data.goal*100:0);$("percent").textContent=p.toFixed(1)+"% ของเป้าหมาย";$("bar").style.width=p+"%";
+ $("goalName").textContent="เป้าหมาย: "+data.name;$("count").textContent=data.entries.length+" รายการ";
+ $("history").innerHTML="";
+ if(!data.entries.length){$("history").textContent="ยังไม่มีรายการที่บันทึกในแอปนี้";return}
+ [...data.entries].reverse().forEach(async e=>{
+  let d=document.createElement("div");d.className="item";let img=document.createElement("img");img.className="thumb";img.alt="หลักฐานการเก็บเงิน";
+  let blob=await getPhoto(e.id);if(blob)img.src=URL.createObjectURL(blob);
+  let details=document.createElement("div");details.className="details";
+  let amt=document.createElement("div");amt.className="amount";amt.textContent="+฿"+e.amount.toLocaleString("th-TH");
+  let date=document.createElement("div");date.className="tiny";date.textContent=e.date;
+  details.append(amt,date);d.append(img,details);$("history").prepend(d);
+ });
+}
+try{let saved=JSON.parse(localStorage.getItem("savings-data"));if(saved)data={...data,...saved}}catch(e){}
+$("proof").addEventListener("change",e=>{selectedPhoto=e.target.files[0]||null;$("save").disabled=!selectedPhoto;
+ let p=$("preview");if(selectedPhoto){p.src=URL.createObjectURL(selectedPhoto);p.style.display="block"}else p.style.display="none"});
+$("goalPhotoInput").addEventListener("change",async e=>{
+ const file=e.target.files[0];if(!file)return;
+ await savePhoto("goal-image",file);
+ $("goalPhoto").src=URL.createObjectURL(file);$("goalPhoto").style.display="block";$("goalPhotoEmpty").style.display="none";
+});
+$("save").onclick=async()=>{
+ let amount=Math.floor(Number($("amount").value));if(!selectedPhoto||!amount||amount<1)return;
+ let id=Date.now()+"-"+Math.random().toString(36).slice(2);
+ await savePhoto(id,selectedPhoto);data.balance+=amount;data.entries.push({id,amount,date:new Date().toLocaleString("th-TH")});persist();render();
+ $("msg").textContent="บันทึกเรียบร้อยแล้ว เก็บเพิ่ม ฿"+amount+" ❤️";$("proof").value="";selectedPhoto=null;$("preview").style.display="none";$("save").disabled=true;
+};
+$("update").onclick=()=>{data.name=$("name").value.trim()||"เป้าหมายของฉัน";data.goal=Math.max(1,Number($("goal").value)||1200);data.balance=Math.max(0,Number($("start").value)||0);persist();render();$("msg").textContent="อัปเดตเป้าหมายแล้ว"};
+$("notify").onclick=async()=>{if(!("Notification"in window)){$("notifyState").textContent="เบราว์เซอร์นี้ไม่รองรับการแจ้งเตือน";return}
+ let p=await Notification.requestPermission();$("notifyState").textContent="สถานะ: "+(p==="granted"?"อนุญาตแล้ว":p);};
+$("test").onclick=()=>{if("Notification"in window&&Notification.permission==="granted")new Notification("เตือนเก็บเงิน 🐠",{body:"วันนี้อย่าลืมเก็บเงิน 100 บาทนะ ถ้ามีค่าน้ำมัน ข้ามได้เลย"});else $("notifyState").textContent="กรุณากดอนุญาตการแจ้งเตือนก่อน"};
+function checkReminder(){if(!("Notification"in window)||Notification.permission!=="granted")return;let now=new Date(),key="reminded-"+now.toDateString();if(localStorage.getItem(key))return;let [h,m]=$("remind").value.split(":").map(Number);if(now.getHours()===h&&now.getMinutes()===m){new Notification("เตือนเก็บเงิน 🐠",{body:"วันนี้เก็บ 100 บาทได้ไหม? ถ้ามีค่าน้ำมัน ข้ามได้เลย"});localStorage.setItem(key,"1")}}
+setInterval(checkReminder,30000);
+if("serviceWorker"in navigator && location.protocol.startsWith("http"))navigator.serviceWorker.register("./sw.js").catch(()=>{});
+</script></body></html>

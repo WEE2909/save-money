@@ -1,0 +1,9 @@
+{
+  "name": "เก็บตังค์ตามเป้า",
+  "short_name": "เก็บเงิน",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#061b35",
+  "theme_color": "#082b4b",
+  "icons": []
+}
