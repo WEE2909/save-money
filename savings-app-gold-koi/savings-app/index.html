@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>กระปุกออมเงิน</title>
+<style>
+:root{--bg:#e6f5f9;--card:#fff;--text:#0b2f40;--muted:#5a7b88;--line:#cde5ec;--accent:#0a7fa8;--accent-t:#fff;--danger:#c0392b;--track:#d4ebf2;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#08202c;--card:#0f3042;--text:#e4f4f9;--muted:#8fb4c2;--line:#1c4a60;--accent:#3cc3e6;--accent-t:#04202b;--danger:#ff7b6b;--track:#1c4a60;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#08202c;--card:#0f3042;--text:#e4f4f9;--muted:#8fb4c2;--line:#1c4a60;--accent:#3cc3e6;--accent-t:#04202b;--danger:#ff7b6b;--track:#1c4a60;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Noto Sans Thai","Sarabun",system-ui,sans-serif;line-height:1.5}
+.wrap{max-width:640px;margin:0 auto;padding:18px 16px 60px}
+h1{font-size:22px;margin:0;display:flex;align-items:center;gap:9px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px}
+.koi-icon{width:48px;height:36px;flex:0 0 auto;filter:drop-shadow(0 2px 2px rgba(120,82,12,.18))}\n.sub{color:var(--muted);font-size:14px;margin:0 0 16px}
+button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--text);padding:9px 14px;border-radius:10px}
+button.pri{background:var(--accent);color:var(--accent-t);border-color:transparent;font-weight:600}
+button.dng{color:var(--danger)}
+button.sm{padding:6px 10px;font-size:13px}
+button.dng2{background:var(--danger);color:#fff;border-color:transparent;font-weight:600}
+.wave{width:100%;height:24px;display:block;margin:-8px 0 8px}
+.total{background:linear-gradient(135deg,#0a7fa8,#12b5c9);color:#fff;border-radius:16px;padding:16px 18px;margin-bottom:16px}
+.total b{font-size:28px;display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:14px}
+.cover{width:100%;height:170px;object-fit:cover;display:block;background:var(--track)}
+.ph{height:110px;display:flex;align-items:center;justify-content:center;font-size:42px;background:var(--track)}
+.body{padding:14px}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.name{font-weight:700;font-size:17px}
+.muted{color:var(--muted);font-size:13px}
+.bar{height:10px;background:var(--track);border-radius:99px;margin:10px 0 6px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,#12b5c9,var(--accent));border-radius:99px;transition:width .4s}
+.acts{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.acts .pri{flex:1}
+.empty{text-align:center;color:var(--muted);padding:40px 10px}
+dialog{border:none;border-radius:18px;padding:0;width:min(440px,calc(100% - 24px));background:var(--card);color:var(--text);max-height:90vh}
+dialog::backdrop{background:rgba(0,0,0,.5)}
+.dl{padding:18px;display:flex;flex-direction:column;gap:12px}
+.dl h2{margin:0;font-size:18px}
+label{font-size:14px;color:var(--muted);display:block;margin-bottom:4px}
+input[type=text],input[type=number]{width:100%;font:inherit;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--text)}
+.prev{width:100%;max-height:220px;object-fit:cover;border-radius:12px;display:none}
+.prev.on{display:block}
+.btns{display:flex;gap:8px;justify-content:flex-end}
+.hist{display:flex;flex-direction:column;gap:10px;overflow:auto;max-height:55vh}
+.h{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:8px}
+.h img{width:56px;height:56px;object-fit:cover;border-radius:8px;cursor:pointer}
+.h .nop{width:56px;height:56px;border-radius:8px;background:var(--track);display:flex;align-items:center;justify-content:center}
+.h div.i{flex:1;min-width:0}
+.viewer img{width:100%;display:block;border-radius:18px}
+input[type=file]{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><h1>
+    <svg class="koi-icon" viewBox="0 0 72 52" role="img" aria-label="ปลาคราฟสีทอง" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 25 C8 14 5 12 2 8 C3 18 7 23 13 26 C7 29 4 35 2 44 C10 40 15 36 20 31"
+            fill="#D99A16" stroke="#9B6410" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M20 26 C29 12 48 10 59 20 C65 25 65 30 59 35 C47 45 29 40 20 29 Z"
+            fill="#F6C84A" stroke="#9B6410" stroke-width="1.8"/>
+      <path d="M33 17 C37 9 44 5 51 5 C49 12 45 17 39 20 Z"
+            fill="#E9B331" stroke="#9B6410" stroke-width="1.5"/>
+      <path d="M34 36 C39 43 46 47 53 46 C50 39 45 35 39 33 Z"
+            fill="#E9B331" stroke="#9B6410" stroke-width="1.5"/>
+      <path d="M24 21 C29 23 31 29 26 34 C22 32 20 29 20 26 Z" fill="#FFF1B8" opacity=".95"/>
+      <path d="M43 15 C47 18 49 22 48 26 C45 28 41 27 39 24 Z" fill="#FFF1B8" opacity=".9"/>
+      <circle cx="57" cy="25" r="2.2" fill="#38270C"/>
+      <path d="M60 30 Q64 32 67 29" fill="none" stroke="#9B6410" stroke-width="1.3" stroke-linecap="round"/>
+      <path d="M29 20 Q34 25 29 31 M36 17 Q41 24 36 34" fill="none" stroke="#D99A16" stroke-width="1.4" stroke-linecap="round"/>
+    </svg>
+    กระปุกออมเงิน
+  </h1><button class="pri" id="addGoal">+ เป้าหมายใหม่</button></div>
+  <p class="sub">ตั้งเป้าหมาย ใส่รูปที่อยากได้ แล้วถ่ายรูปทุกครั้งที่เก็บเงิน</p>
+  <svg class="wave" viewBox="0 0 640 30" preserveAspectRatio="none" aria-hidden="true"><path d="M0 15 Q40 0 80 15 T160 15 T240 15 T320 15 T400 15 T480 15 T560 15 T640 15 V30 H0Z" fill="var(--accent)" opacity=".22"/></svg>
+  <div class="total" id="total"></div>
+  <div id="list"></div>
+</div>
+
+<dialog id="goalDlg"><div class="dl">
+  <h2>เป้าหมายใหม่</h2>
+  <div><label>ชื่อเป้าหมาย</label><input type="text" id="gName" placeholder="เช่น ไปเที่ยวญี่ปุ่น"></div>
+  <div><label>จำนวนเงินเป้าหมาย (บาท)</label><input type="number" id="gTarget" inputmode="decimal" min="1" placeholder="30000"></div>
+  <img class="prev" id="gPrev" alt="">
+  <div><button type="button" id="gPick">🖼️ เลือกรูปจากเครื่อง</button>
+  <input type="file" id="gFile" accept="image/*"></div>
+  <div class="btns"><button id="gCancel">ยกเลิก</button><button class="pri" id="gSave">บันทึก</button></div>
+</div></dialog>
+
+<dialog id="depDlg"><div class="dl">
+  <h2 id="dTitle">เก็บเงิน</h2>
+  <div><label>จำนวนเงิน (บาท)</label><input type="number" id="dAmt" inputmode="decimal" min="1" placeholder="100"></div>
+  <div><label>บันทึกเพิ่มเติม (ไม่บังคับ)</label><input type="text" id="dNote" placeholder="เช่น เงินเดือนออก"></div>
+  <img class="prev" id="dPrev" alt="">
+  <div><button type="button" id="dPick">📷 ถ่ายรูปตอนเก็บเงิน</button>
+  <input type="file" id="dFile" accept="image/*" capture="environment"></div>
+  <div class="muted" id="dHint">บนมือถือจะเปิดกล้องให้ถ่ายทันที บนคอมพิวเตอร์จะเลือกไฟล์รูปแทน</div>
+  <div class="btns"><button id="dCancel">ยกเลิก</button><button class="pri" id="dSave">เก็บเงิน</button></div>
+</div></dialog>
+
+<dialog id="histDlg"><div class="dl">
+  <h2 id="hTitle">ประวัติ</h2>
+  <div class="hist" id="hList"></div>
+  <div class="btns"><button id="hClose">ปิด</button></div>
+</div></dialog>
+
+<dialog id="askDlg"><div class="dl"><h2>ยืนยันอีกครั้ง</h2><div id="aMsg"></div><div class="btns"><button id="aNo">ยกเลิก</button><button class="dng2" id="aYes">ลบ</button></div></div></dialog>
+
+<dialog id="viewDlg" class="viewer"><div class="dl"><img id="vImg" alt=""><div class="btns"><button id="vClose">ปิด</button></div></div></dialog>
+
+<script>
+(function(){
+var goals=[],db=null,curId=null,gImg=null,dImg=null;
+var $=function(i){return document.getElementById(i)};
+var fmt=function(n){return Number(n).toLocaleString('th-TH',{maximumFractionDigits:2})};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+
+function openDB(){return new Promise(function(res,rej){try{var r=indexedDB.open('savings-app',1);r.onupgradeneeded=function(){r.result.createObjectStore('goals',{keyPath:'id'})};r.onsuccess=function(){res(r.result)};r.onerror=function(){rej(r.error)}}catch(e){rej(e)}})}
+function loadAll(){return new Promise(function(res){if(!db)return res([]);try{var q=db.transaction('goals').objectStore('goals').getAll();q.onsuccess=function(){res(q.result||[])};q.onerror=function(){res([])}}catch(e){res([])}})}
+function put(g){if(!db)return;try{db.transaction('goals','readwrite').objectStore('goals').put(g)}catch(e){}}
+function rm(id){if(!db)return;try{db.transaction('goals','readwrite').objectStore('goals').delete(id)}catch(e){}}
+
+function shrink(file,max){return new Promise(function(res,rej){
+  var fr=new FileReader();
+  fr.onerror=function(){rej()};
+  fr.onload=function(){var im=new Image();im.onerror=function(){rej()};
+    im.onload=function(){var s=Math.min(1,max/Math.max(im.width,im.height));var c=document.createElement('canvas');c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext('2d').drawImage(im,0,0,c.width,c.height);res(c.toDataURL('image/jpeg',0.78))};
+    im.src=fr.result};
+  fr.readAsDataURL(file)})}
+
+function saved(g){return g.deposits.reduce(function(a,d){return a+d.amt},0)}
+
+function render(){
+  var sum=goals.reduce(function(a,g){return a+saved(g)},0);
+  $('total').innerHTML='<span>เงินออมรวมทั้งหมด</span><b>฿'+fmt(sum)+'</b>';
+  var L=$('list');
+  if(!goals.length){L.innerHTML='<div class="empty">ยังไม่มีเป้าหมาย<br>กด “+ เป้าหมายใหม่” เพื่อเริ่มออมเงิน</div>';return}
+  L.innerHTML=goals.map(function(g){
+    var s=saved(g),p=Math.min(100,Math.round(s/g.target*100)),left=Math.max(0,g.target-s);
+    return '<div class="card" data-id="'+g.id+'">'+
+      (g.img?'<img class="cover" src="'+g.img+'" alt="">':'<div class="ph">⛵</div>')+
+      '<div class="body"><div class="row"><span class="name">'+esc(g.name)+'</span><span class="muted">'+p+'%</span></div>'+
+      '<div class="bar"><i style="width:'+p+'%"></i></div>'+
+      '<div class="row"><span>฿'+fmt(s)+' <span class="muted">/ ฿'+fmt(g.target)+'</span></span><span class="muted">'+(left>0?'เหลืออีก ฿'+fmt(left):'🎉 ครบเป้าแล้ว!')+'</span></div>'+
+      '<div class="acts"><button class="pri" data-act="dep">+ เก็บเงิน</button><button data-act="hist">ประวัติ ('+g.deposits.length+')</button><button class="dng sm" data-act="del">ลบ</button></div>'+
+      '</div></div>'}).join('')
+}
+
+var askCb=null;
+function ask(msg,yes,cb,single){$('aMsg').textContent=msg;$('aYes').textContent=yes;$('aNo').style.display=single?'none':'';askCb=cb;$('askDlg').showModal()}
+$('aYes').onclick=function(){var f=askCb;askCb=null;$('askDlg').close();if(f)f()};
+$('aNo').onclick=function(){askCb=null;$('askDlg').close()};
+function setPrev(el,src){if(src){el.src=src;el.classList.add('on')}else{el.removeAttribute('src');el.classList.remove('on')}}
+function byId(id){return goals.filter(function(g){return g.id===id})[0]}
+
+$('addGoal').onclick=function(){gImg=null;$('gName').value='';$('gTarget').value='';setPrev($('gPrev'),null);$('goalDlg').showModal()};
+$('gPick').onclick=function(){$('gFile').click()};
+$('gFile').onchange=function(e){var f=e.target.files[0];if(!f)return;shrink(f,900).then(function(d){gImg=d;setPrev($('gPrev'),d)}).catch(function(){ask('อ่านรูปไม่ได้ ลองรูปอื่นดู','ตกลง',null,true)});e.target.value=''};
+$('gCancel').onclick=function(){$('goalDlg').close()};
+$('gSave').onclick=function(){
+  var n=$('gName').value.trim(),t=parseFloat($('gTarget').value);
+  if(!n){$('gName').focus();return}
+  if(!(t>0)){$('gTarget').focus();return}
+  var g={id:uid(),name:n,target:t,img:gImg,created:Date.now(),deposits:[]};
+  goals.unshift(g);put(g);render();$('goalDlg').close()};
+
+$('list').onclick=function(e){
+  var b=e.target.closest('button');if(!b)return;
+  var c=b.closest('.card');var g=byId(c.dataset.id);if(!g)return;curId=g.id;
+  var a=b.dataset.act;
+  if(a==='dep'){dImg=null;$('dAmt').value='';$('dNote').value='';setPrev($('dPrev'),null);$('dTitle').textContent='เก็บเงิน: '+g.name;$('depDlg').showModal()}
+  else if(a==='hist'){showHist(g)}
+  else if(a==='del'){ask('ลบเป้าหมาย “'+g.name+'” และประวัติการเก็บเงินทั้งหมดใช่ไหม? ลบแล้วกู้คืนไม่ได้','ลบ',function(){goals=goals.filter(function(x){return x.id!==g.id});rm(g.id);render()});}
+};
+
+$('dPick').onclick=function(){$('dFile').click()};
+$('dFile').onchange=function(e){var f=e.target.files[0];if(!f)return;shrink(f,900).then(function(d){dImg=d;setPrev($('dPrev'),d)}).catch(function(){ask('อ่านรูปไม่ได้ ลองถ่ายใหม่อีกครั้ง','ตกลง',null,true)});e.target.value=''};
+$('dCancel').onclick=function(){$('depDlg').close()};
+$('dSave').onclick=function(){
+  var a=parseFloat($('dAmt').value),g=byId(curId);
+  if(!g)return;
+  if(!(a>0)){$('dAmt').focus();return}
+  g.deposits.push({id:uid(),amt:a,note:$('dNote').value.trim(),photo:dImg,date:Date.now()});
+  put(g);render();$('depDlg').close()};
+
+function showHist(g){
+  $('hTitle').textContent='ประวัติ: '+g.name;
+  var L=$('hList');
+  if(!g.deposits.length){L.innerHTML='<div class="empty">ยังไม่มีการเก็บเงิน</div>'}
+  else L.innerHTML=g.deposits.slice().reverse().map(function(d){
+    var dt=new Date(d.date).toLocaleString('th-TH',{dateStyle:'medium',timeStyle:'short'});
+    return '<div class="h" data-d="'+d.id+'">'+(d.photo?'<img src="'+d.photo+'" alt="">':'<div class="nop">💰</div>')+
+    '<div class="i"><b>฿'+fmt(d.amt)+'</b><div class="muted">'+dt+(d.note?' · '+esc(d.note):'')+'</div></div>'+
+    '<button class="dng sm" data-x="'+d.id+'">ลบ</button></div>'}).join('');
+  if(!$('histDlg').open)$('histDlg').showModal()
+}
+$('hList').onclick=function(e){
+  var g=byId(curId);if(!g)return;
+  var x=e.target.closest('[data-x]');
+  if(x){var did=x.dataset.x;ask('ลบรายการเก็บเงินนี้ใช่ไหม?','ลบ',function(){g.deposits=g.deposits.filter(function(d){return d.id!==did});put(g);render();showHist(g)});return}
+  var im=e.target.closest('img');
+  if(im){$('vImg').src=im.src;$('viewDlg').showModal()}
+};
+$('hClose').onclick=function(){$('histDlg').close()};
+$('vClose').onclick=function(){$('viewDlg').close()};
+
+openDB().then(function(d){db=d}).catch(function(){}).then(loadAll).then(function(r){goals=r.sort(function(a,b){return b.created-a.created});render()});
+})();
+</script>
+</body>
+</html>
